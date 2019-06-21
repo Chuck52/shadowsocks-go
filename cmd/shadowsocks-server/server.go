@@ -511,7 +511,7 @@ func managerDaemon(conn *net.UDPConn) {
 	defer close(ctx)
 	reportconnSet := make(map[string]*net.UDPAddr, 1024)
 	go func() {
-		timer := time.Tick(10 * time.Second)
+		timer := time.Tick(1 * time.Second)
 		for {
 			select {
 			case <-ctx:
@@ -522,6 +522,7 @@ func managerDaemon(conn *net.UDPConn) {
 					if len(res) == 0 {
 						continue
 					}
+					//fmt.Println(time.Now().Format("2006-01-02 15:04:05")," report stat ==> ", string(res))
 					conn.WriteToUDP(res, addr)
 				}
 			}
